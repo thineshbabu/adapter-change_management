@@ -239,7 +239,7 @@ healthcheck(callback) {
      let actualData = null;
      let modifiedData = {};
      
-     this.connector.post(connector.options, (responseData, error) => {
+     this.connector.post((responseData, error) => {
          if (error) {
             log.error(error);
          } else {

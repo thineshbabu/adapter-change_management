@@ -198,7 +198,8 @@ sendRequest(callOptions, callback) {
  *   Will be HTML text if hibernating instance.
  * @param {error} callback.error - The error property of callback.
  */
-post(callOptions, callback) {
+post(callback) {
+  let callOptions = { ...this.options };
   callOptions.method = 'POST';
   this.sendRequest(callOptions, (results, error) => callback(results, error));
 }
