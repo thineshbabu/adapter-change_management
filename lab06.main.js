@@ -192,31 +192,7 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * get() takes a callback function.
      */
-     //this.connector.get(callback);
-     let actualData = null;
-     let modifiedData = [{}];
-     this.connector.get((responseData, error) => {
-        if (error) {
-           log.error(error);
-        } else {
-           log.info("Data retrieved successfully !!!");
-           if(responseData != undefined && "body" in responseData) {
-               actualData = JSON.parse(responseData.body);
-               for (let i = 0; i < actualData.result.length; i++) {               
-                modifiedData[i] = {};
-                modifiedData[i]["change_ticket_number"] = actualData.result[i].number;
-                modifiedData[i]["change_ticket_key"] = actualData.result[i].sys_id;
-                modifiedData[i]["active"] = actualData.result[i].active;
-                modifiedData[i]["priority"] = actualData.result[i].priority;
-                modifiedData[i]["description"] = actualData.result[i].description;
-                modifiedData[i]["work_start"] = actualData.result[i].work_start;
-                modifiedData[i]["work_end"] = actualData.result[i].work_end;
-              }
-            }
-        }
-        log.info("Modified DATA: " + JSON.stringify(modifiedData));
-        return callback(modifiedData, error);
-      });
+     this.connector.get(callback);
   }
 
   /**
@@ -235,29 +211,7 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * post() takes a callback function.
      */
-     //this.connector.post(connector.options, callback);
-     let actualData = null;
-     let modifiedData = {};
-     
-     this.connector.post(connector.options, (responseData, error) => {
-         if (error) {
-            log.error(error);
-         } else {
-            log.info("Created Successfully !!!");
-            if(responseData != undefined && "body" in responseData) {
-                actualData = JSON.parse(responseData.body);
-                modifiedData['change_ticket_number'] = actualData.result.number;
-                modifiedData['change_ticket_key'] = actualData.result.sys_id;
-                modifiedData['active'] = actualData.result.active;
-                modifiedData['priority'] = actualData.result.priority;
-                modifiedData['description'] = actualData.result.description;
-                modifiedData['work_start'] = actualData.result.work_start;
-                modifiedData['work_end'] = actualData.result.work_end;
-            }
-         }
-         log.info("EXTRACTED POST DATA: " + JSON.stringify(modifiedData));
-         return callback(modifiedData, error);
-      });
+     this.connector.post(connector.options, callback);
   }
 }
 
